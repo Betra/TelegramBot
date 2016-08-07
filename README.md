@@ -4,4 +4,4 @@
 <center><img src='http://i.imgur.com/4FboUkV.jpg' /></center>
 
 #Комманды
-`/hello` `/begin` - Приветствует
+`/hello`, `/begin` - Приветствует
