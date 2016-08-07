@@ -7,7 +7,7 @@
  */
 set_time_limit(0);
 
-define("BOTTOKEN","267292241:AAHq1lS36feGwAsD5_ko77zKMllh9ZVlaDg");
+define("BOTTOKEN","Bot ID");
 define("BOTSITE","https://api.telegram.org/bot".BOTTOKEN."/");
 
 class Message
