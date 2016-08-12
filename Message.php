@@ -8,11 +8,6 @@
  */
 require('constants.php');
 
-<<<<<<< HEAD:Message.php
-=======
-define("BOTTOKEN","Bot ID");
-define("BOTSITE","https://api.telegram.org/bot".BOTTOKEN."/");
->>>>>>> origin/master:webhook.php
 
 class Message
 {
@@ -55,12 +50,4 @@ class Message
     {
         file_get_contents(BOTSITE."/sendmessage?chat_id=".$this->chatID."&text=".$message);
     }
-<<<<<<< HEAD:Message.php
 }
-=======
-}
-$content = file_get_contents("php://input");
-$obj = new Message($content);
-$com = $obj->checkCommand();
-$obj->send($com);
->>>>>>> origin/master:webhook.php
