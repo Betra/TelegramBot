@@ -1,21 +1,19 @@
 <?php
-/**
- * @author Ivan Dorofeev <IDDorofeev@yahoo.com>
- * @version 0.1
- *
- *
- */
-set_time_limit(0);
 
-define("BOTTOKEN","267292241:AAHq1lS36feGwAsD5_ko77zKMllh9ZVlaDg");
-define("BOTSITE","https://api.telegram.org/bot".BOTTOKEN."/");
+/**
+ * For security reasons 'constants.php' were hide via .gitignore
+ * @internal
+ * @const BOTTOKEN Contains Telegram Bot's token
+ * @const BOTSITE Contains http path to the Bot
+ */
+require('constants.php');
+
 
 class Message
 {
-    /** @var  int | null Telegram Chat ID. */
-    private $chatID;
-    /** @var string | null Message.*/
-    private $text;
+
+    private $chatID;    /** @var  int | null Telegram Chat ID. */
+    private $text;      /** @var string | null Message.*/
 
     /**
      * Message constructor.
@@ -37,11 +35,11 @@ class Message
      */
     public function checkCommand()
     {
-       switch($this->text) {
+        switch($this->text) {
 
-           case '/begin': return 'Good morning, sir'; break;
-           default: return 'Sorry, sir'; break;
-       }
+            case '/begin': return 'Good morning, sir'; break;
+            default: return 'Sorry, sir'; break;
+        }
     }
 
     /**
@@ -53,7 +51,3 @@ class Message
         file_get_contents(BOTSITE."/sendmessage?chat_id=".$this->chatID."&text=".$message);
     }
 }
-$content = file_get_contents("php://input");
-$obj = new Message($content);
-$com = $obj->checkCommand();
-$obj->send($com);
