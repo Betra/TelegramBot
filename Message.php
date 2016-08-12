@@ -8,12 +8,10 @@
  */
 require('constants.php');
 
-
 class Message
 {
-
     private $chatID;    /** @var  int | null Telegram Chat ID. */
-    private $text;      /** @var string | null Message.*/
+    public $text;      /** @var string | null Message.*/
 
     /**
      * Message constructor.
@@ -27,6 +25,16 @@ class Message
         $this->chatID = $message['chat']['id'];
         $this->text = $message['text'];
 
+    }
+
+
+    /**
+     * @param $text
+     * @return bool
+     */
+    static function isRequest($text)
+    {
+        return preg_match('/\/.+/',$text);
     }
 
     /**
@@ -48,6 +56,6 @@ class Message
      */
     public function send($message)
     {
-        file_get_contents(BOTSITE."/sendmessage?chat_id=".$this->chatID."&text=".$message);
+        file_get_contents(BOTSITE."sendmessage?chat_id=".$this->chatID."&text=".$message);
     }
 }
