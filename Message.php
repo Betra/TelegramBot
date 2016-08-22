@@ -3,10 +3,13 @@
 /**
  * For security reasons 'constants.php' were hide via .gitignore
  * @internal
- * @const BOTTOKEN Contains Telegram Bot's token
- * @const BOTSITE Contains http path to the Bot
+ * @const BOTTOKEN Contains Telegram Bot's token.
+ * @const BOTSITE Contains http path to the Bot.
+ * @const WEATHER_API Contains url to the JSON string.
+ * @const KUDAGO_API Contains url  to the JSON string, properties are needed.
  */
 require('constants.php');
+require('commands.php');
 
 class Message
 {
@@ -14,9 +17,8 @@ class Message
     public $text;      /** @var string | null Message.*/
 
     /**
-     * Message constructor.
      * @param $content
-     * Takes the the ID  and Message from JSON
+     * Takes the ID  and the Message from JSON string
      */
     public function __construct($content)
     {
@@ -24,35 +26,32 @@ class Message
         $message = $update['message'];
         $this->chatID = $message['chat']['id'];
         $this->text = $message['text'];
-
     }
-
 
     /**
      * @param $text
      * @return bool
+     * May be turned on
      */
     static function isRequest($text)
     {
-        return preg_match('/\/.+/',$text);
+        return (bool) preg_match('/\/.+/',$text);
     }
 
     /**
-     * @return string Command
-     * @deprecated That's just a poor beginning, okay?
+     * @return string Response
      */
-    public function checkCommand()
+    public function searchCommand()
     {
-        switch($this->text) {
 
-            case '/begin': return 'Good morning, sir'; break;
+        switch($this->text) {
+            case '/start': return  Command::start(); break;
             default: return 'Sorry, sir'; break;
         }
     }
 
     /**
      * @param $message string Answer
-     * Sends the bot's answer to the client
      */
     public function send($message)
     {
