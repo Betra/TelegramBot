@@ -29,16 +29,6 @@ class Message
     }
 
     /**
-     * @param $text
-     * @return bool
-     * May be turned on
-     */
-    static function isRequest($text)
-    {
-        return (bool) preg_match('/\/.+/',$text);
-    }
-
-    /**
      * @return string Response
      */
     public function searchCommand()
@@ -58,6 +48,21 @@ class Message
      */
     public function send($message)
     {
-        file_get_contents(BOTSITE."sendmessage?chat_id=".$this->chatID."&text=".$message);
+
+        $data = [
+            'chat_id'   => $this->chatID,
+            'text'      => $message
+        ];
+
+        $opts = ['https' =>
+            [
+                'method'    => 'POST',
+                'header'    => 'Content-type: application/x-www-form-urlencoded',
+                'content'   => $data
+            ]
+        ];
+       // file_get_contents(BOTSITE."sendmessage?chat_id=".$this->chatID."&text=".$message);
+       $context = stream_context_create($opts);
+        file_get_contents(BOTSITE.'sendmessage', false, $context);
     }
 }
