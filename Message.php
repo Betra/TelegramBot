@@ -9,7 +9,7 @@
  * @const KUDAGO_API Contains url  to the JSON string, properties are needed.
  */
 require('constants.php');
-require('commands.php');
+require('commands.php'); /** class Command */
 
 class Message
 {
@@ -43,15 +43,18 @@ class Message
      */
     public function searchCommand()
     {
-
         switch($this->text) {
-            case '/start': return  Command::start(); break;
-            default: return 'Sorry, sir'; break;
+            case '/start':
+                return Command::start(); break;
+            case 'Выбрать город':
+                return Command::chooseCity(); break;
+            default:
+                return 'Sorry, sir'; break;
         }
     }
 
     /**
-     * @param $message string Answer
+     * @param $message string Response
      */
     public function send($message)
     {

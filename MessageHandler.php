@@ -5,17 +5,12 @@
  */
 set_time_limit(0);
 
-/**
- * @todo Incoming message (1) -> Checking for special char '/'(2) -> Looking for the command (3) -> Complete the requested task (4) -> Response(5) !
- */
-
-
 require('Message.php');
 $content = file_get_contents("php://input");
+if($content == null) die; //Otherwise this page in browser will show an error. Bot will constantly try to send message to undefined chat ($chatID doesn't exist)
+
 $message = new Message($content);
 unset($content);
-
-//if(!Message::isRequest($message->text)) die; // Not required
 
 $obj = (string) $message->searchCommand();
 $message->send($obj);
