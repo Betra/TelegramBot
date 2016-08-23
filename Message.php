@@ -54,11 +54,12 @@ class Message
             'text'      => $message
         ];
 
-        $opts = ['https' =>
+        $httpdata = http_build_query($data);
+        $opts = ['http' =>
             [
                 'method'    => 'POST',
                 'header'    => 'Content-type: application/x-www-form-urlencoded',
-                'content'   => $data
+                'content'   => $httpdata
             ]
         ];
        // file_get_contents(BOTSITE."sendmessage?chat_id=".$this->chatID."&text=".$message);
